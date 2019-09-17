@@ -33,6 +33,7 @@ object GittutorialRoutes {
 
   def goodbyeWorldRoutes[F[_]: Sync](G: GoodbyeWorld[F]): HttpRoutes[F] = {
     val dsl = new Http4sDsl[F]{}
-
+    import dsl._
+    
   }
 }
