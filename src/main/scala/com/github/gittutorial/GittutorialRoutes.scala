@@ -35,7 +35,11 @@ object GittutorialRoutes {
     val dsl = new Http4sDsl[F]{}
     import dsl._
     HttpRoutes.of[F] {
-      
+      case GET -> Root / "goodbye" / name =>
+        for {
+          farewell <- G.goodbye(GoodbyeWorld.Name(name))
+          resp <- Ok(farewell)
+        } yield resp
     }
   }
 }
