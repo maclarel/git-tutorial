@@ -15,6 +15,7 @@ object GittutorialServer {
     for {
       client <- BlazeClientBuilder[F](global).stream
       helloWorldAlg = HelloWorld.impl[F]
+      goodbyeWorldAlg = GoodbyeWorld.impl[F]
       jokeAlg = Jokes.impl[F](client)
 
       // Combine Service Routes into an HttpApp.
@@ -23,8 +24,9 @@ object GittutorialServer {
       // in the underlying routes.
       httpApp = (
         GittutorialRoutes.helloWorldRoutes[F](helloWorldAlg) <+>
-        GittutorialRoutes.jokeRoutes[F](jokeAlg)
-      ).orNotFound
+          GittutorialRoutes.jokeRoutes[F](jokeAlg) <+>
+          GittutorialRoutes.goodbyeWorldRoutes[F](goodbyeWorldAlg)
+        ).orNotFound
 
       // With Middlewares in place
       finalHttpApp = Logger.httpApp(true, true)(httpApp)
