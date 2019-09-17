@@ -30,4 +30,8 @@ object GittutorialRoutes {
         } yield resp
     }
   }
+
+  def goodbyeWorldRoutes[F[_]: Sync](G: GoodbyeWorld[F]): HttpRoutes[F] = {
+
+  }
 }
