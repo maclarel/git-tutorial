@@ -15,7 +15,7 @@ object GittutorialServer {
     for {
       client <- BlazeClientBuilder[F](global).stream
       helloWorldAlg = HelloWorld.impl[F]
-      jokeAlg = Jokes.impl[F](client)
+      jokeAlg = NoJokes.impl[F]
 
       // Combine Service Routes into an HttpApp.
       // Can also be done via a Router if you
